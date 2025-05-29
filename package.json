@@ -1,0 +1,15 @@
+{
+  "name": "staticflow",
+  "version": "1.0.0",
+  "description": "staticfow sin dependencia modo beta",
+  "main": "staticflow.js",
+  "scripts": {
+    "start": "node ./staticflow.js --watch",
+    "build":"node ./staticflow.js --minify"
+  },
+  "keywords": [
+    "staticflow"
+  ],
+  "author": "duanly vega alderete",
+  "license": "MIT"
+}
