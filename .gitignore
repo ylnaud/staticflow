@@ -1,0 +1,14 @@
+# Salida de compilación (se regenera con `npm run build`)
+public/
+
+# Dependencias
+node_modules/
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Variables de entorno
+.env
+.env.local

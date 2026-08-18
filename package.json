@@ -1,11 +1,14 @@
 {
   "name": "staticflow",
-  "version": "1.0.0",
-  "description": "staticfow sin dependencia modo beta",
+  "version": "1.1.0",
+  "description": "staticflow sin dependencias, modo beta",
   "main": "staticflow.js",
+  "engines": {
+    "node": ">=22.15.0"
+  },
   "scripts": {
     "start": "node ./staticflow.js --watch",
-    "build":"node ./staticflow.js --minify"
+    "build": "node ./staticflow.js --minify"
   },
   "keywords": [
     "staticflow"
