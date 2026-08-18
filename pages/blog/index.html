@@ -1,19 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Blog — Mi Sitio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos — StaticFlow</title>
+  <meta name="description" content="Ideas y casos de uso para construir con StaticFlow: blogs, portfolios, landings, documentación y más.">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <!-- @import header -->
+
   <main>
-    <h1>Blog</h1>
-    <p>Próximamente: artículos y novedades.</p>
-    <ul>
-      <li><strong>Cómo crear tu primer sitio con StaticFlow</strong> — <em>próximamente</em></li>
-      <li><strong>Componentes reutilizables en HTML puro</strong> — <em>próximamente</em></li>
-    </ul>
+    <div class="container">
+
+      <div class="prose-header">
+        <p class="section-label">Proyectos</p>
+        <h1>¿Qué podés construir?</h1>
+        <p class="lead">StaticFlow es una base minimalista para cualquier sitio que no necesite un servidor dinámico. Estos son algunos casos de uso comunes.</p>
+      </div>
+
+      <div class="project-grid">
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">✍️</div>
+          <h2>Blog personal</h2>
+          <p>Escribí tus artículos en HTML puro, usá un componente de header/footer común y publicá sin configurar nada. Cada post es un archivo <code>.html</code> en <code>pages/blog/</code>.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML</span>
+            <span class="tag-pill">CSS</span>
+            <span class="tag-pill">Componentes</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">🎨</div>
+          <h2>Portfolio</h2>
+          <p>Mostrá tus proyectos con un diseño limpio y carga instantánea. Ideal para diseñadores y desarrolladores que quieren una presencia web sin overhead.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML</span>
+            <span class="tag-pill">CSS Grid</span>
+            <span class="tag-pill">Assets</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">🚀</div>
+          <h2>Landing page</h2>
+          <p>Página de lanzamiento o captura de leads. Con el servidor de desarrollo y livereload, iterás el diseño en tiempo real sin recargar manualmente.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML</span>
+            <span class="tag-pill">CSS</span>
+            <span class="tag-pill">JS mínimo</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">📚</div>
+          <h2>Documentación técnica</h2>
+          <p>Docs para tu librería o herramienta. Navegación por componentes, bloques de código con botón de copiar, y estructura de carpetas que refleja la jerarquía del sitio.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML semántico</span>
+            <span class="tag-pill">Componentes</span>
+            <span class="tag-pill">CopyCode JS</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">🛍️</div>
+          <h2>Landing de producto</h2>
+          <p>Presentación de un producto o servicio. Precios, características, CTA y testimonios en una sola página optimizada para conversión.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML</span>
+            <span class="tag-pill">CSS custom props</span>
+            <span class="tag-pill">SmoothScroll</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">📅</div>
+          <h2>Página de evento</h2>
+          <p>Countdown, agenda, speakers y registro. Contenido que cambia poco pero necesita verse bien en mobile, tablet y desktop sin un framework pesado.</p>
+          <div class="project-tags">
+            <span class="tag-pill">HTML</span>
+            <span class="tag-pill">Responsive CSS</span>
+            <span class="tag-pill">JS modular</span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cta" style="margin-top: 3rem;">
+        <h2>¿Tenés otro caso de uso?</h2>
+        <p>StaticFlow es una plantilla abierta — adaptala como quieras. Si construís algo interesante, abrí un issue en GitHub para mostrarlo.</p>
+        <div class="btn-group">
+          <a href="https://github.com/ylnaud/staticflow/generate" class="btn btn-primary" target="_blank" rel="noopener">Usar como plantilla →</a>
+          <a href="https://github.com/ylnaud/staticflow/issues" class="btn btn-outline" target="_blank" rel="noopener">Abrir un issue</a>
+        </div>
+      </div>
+
+    </div>
   </main>
+
   <!-- @import footer -->
 </body>
 </html>

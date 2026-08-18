@@ -4,54 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StaticFlow — Generador de sitios estáticos sin dependencias</title>
+  <meta name="description" content="Generador de sitios estáticos minimalista. Solo Node.js, cero dependencias, componentes reutilizables y build en milisegundos.">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <!-- @import header -->
 
   <main>
-    <div class="container">
 
-      <!-- Hero -->
-      <div class="hero">
-        <div class="badge">Sin dependencias · Node.js · Open Source</div>
-        <h1>Sitios estáticos,<br>sin complicaciones</h1>
-        <p>StaticFlow compila tus páginas HTML con componentes reutilizables y genera un sitio listo para subir a cualquier hosting.</p>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="badge">Sin dependencias · Solo Node.js · Open Source</div>
+        <h1 id="hero-title">Sitios estáticos,<br>sin complicaciones</h1>
+        <p>StaticFlow compila tus páginas HTML con componentes reutilizables y genera un sitio listo para subir a cualquier hosting. Sin npm install, sin bundlers, sin magia.</p>
         <div class="btn-group">
-          <a href="https://github.com/ylnaud/staticflow" class="btn btn-primary">Ver en GitHub</a>
-          <a href="/about.html" class="btn btn-outline">Cómo funciona →</a>
+          <a href="https://github.com/ylnaud/staticflow" class="btn btn-primary" target="_blank" rel="noopener">Ver en GitHub</a>
+          <a href="/about.html" class="btn btn-outline">Documentación →</a>
         </div>
       </div>
+    </section>
 
-      <!-- Features -->
-      <div class="features">
-        <div class="feature">
-          <div class="icon">⚡</div>
-          <h3>Ultra rápido</h3>
-          <p>Compilación completa en milisegundos, sin herramientas de compilación pesadas.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">♻️</div>
-          <h3>Componentes</h3>
-          <p>Reutilizá header, footer y cualquier fragmento HTML con una sola línea.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">📦</div>
-          <h3>Cero dependencias</h3>
-          <p>Solo Node.js. Sin npm install, sin node_modules, sin sorpresas.</p>
+    <!-- Features -->
+    <section class="features-section" aria-labelledby="features-title">
+      <div class="container">
+        <p class="section-label">Por qué StaticFlow</p>
+        <h2 id="features-title">Todo lo que necesitás, nada más</h2>
+        <div class="features">
+          <article class="feature">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Ultra rápido</h3>
+            <p>Compilación completa en milisegundos usando solo módulos nativos de Node.js. Sin webpack, sin Vite, sin rollup.</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true">♻️</div>
+            <h3>Componentes</h3>
+            <p>Reutilizá header, footer y cualquier fragmento HTML con una sola línea. Imports anidados y detección de ciclos incluidos.</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true">📦</div>
+            <h3>Cero dependencias</h3>
+            <p>Solo Node.js. El <code>package.json</code> no tiene ni una dependencia en <code>dependencies</code> ni en <code>devDependencies</code>.</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Cómo funciona -->
-      <section>
+    <!-- Qué podés construir -->
+    <section class="usecases-section" aria-labelledby="usecases-title">
+      <div class="container">
+        <p class="section-label">Casos de uso</p>
+        <h2 id="usecases-title">¿Qué podés construir?</h2>
+        <p>StaticFlow es ideal para cualquier sitio que no necesite un servidor dinámico ni un framework pesado.</p>
+        <div class="usecases">
+          <div class="usecase">
+            <span class="usecase-icon" aria-hidden="true">✍️</span>
+            <h4>Blog personal</h4>
+            <p>Escribí tus artículos en HTML puro y publicá sin configurar nada.</p>
+          </div>
+          <div class="usecase">
+            <span class="usecase-icon" aria-hidden="true">🎨</span>
+            <h4>Portfolio</h4>
+            <p>Mostrá tus proyectos con un diseño limpio y carga instantánea.</p>
+          </div>
+          <div class="usecase">
+            <span class="usecase-icon" aria-hidden="true">🚀</span>
+            <h4>Landing page</h4>
+            <p>Página de lanzamiento o captura de leads lista en minutos.</p>
+          </div>
+          <div class="usecase">
+            <span class="usecase-icon" aria-hidden="true">📚</span>
+            <h4>Documentación</h4>
+            <p>Docs técnicos con navegación por componentes y sintaxis resaltada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="how-section" aria-labelledby="how-title">
+      <div class="container">
         <p class="section-label">Cómo funciona</p>
-        <h2>Un comando. Un sitio.</h2>
-        <p>Escribís tus páginas en HTML, referenciás los componentes con un comentario especial, y StaticFlow se encarga del resto.</p>
+        <h2 id="how-title">Un comentario. Un componente.</h2>
+        <p>Escribís tus páginas en HTML, referenciás los componentes con <code>&lt;!-- @import nombre --&gt;</code>, y StaticFlow los resuelve recursivamente antes de generar el sitio.</p>
 
         <div class="two-col">
           <div>
-            <p style="font-size:0.8rem;font-weight:600;margin-bottom:8px;color:var(--text)">pages/index.html</p>
-<pre><code><span class="tag">&lt;body&gt;</span>
+            <p class="code-label">pages/index.html</p>
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"es"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;body&gt;</span>
   <span class="comment">&lt;!-- @import header --&gt;</span>
 
   <span class="tag">&lt;main&gt;</span>
@@ -59,46 +101,105 @@
   <span class="tag">&lt;/main&gt;</span>
 
   <span class="comment">&lt;!-- @import footer --&gt;</span>
-<span class="tag">&lt;/body&gt;</span></code></pre>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
           </div>
           <div>
-            <p style="font-size:0.8rem;font-weight:600;margin-bottom:8px;color:var(--text)">Terminal</p>
-<pre><code><span class="comment"># Modo desarrollo</span>
+            <p class="code-label">Terminal</p>
+<pre><code><span class="comment"># Modo desarrollo con livereload</span>
 <span class="cmd">npm start</span>
 
-<span class="comment"># Build para producción</span>
+<span class="comment"># Build para producción (minificado)</span>
 <span class="cmd">npm run build</span>
 
-<span class="comment"># Resultado en public/</span>
-<span class="cmd">→ public/index.html ✅</span></code></pre>
+<span class="comment"># Resultado</span>
+<span class="cmd">📦 3 páginas compiladas</span>
+<span class="cmd">✅ Build completo en 12ms</span></code></pre>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Estructura -->
-      <section>
+    <!-- Estructura de proyecto -->
+    <section class="structure-section" aria-labelledby="structure-title">
+      <div class="container">
         <p class="section-label">Estructura</p>
-        <h2>Todo en su lugar</h2>
-        <p>Una estructura de carpetas simple y predecible. Nada mágico.</p>
-<pre><code>mi-sitio/
-├── <span class="attr">_components/</span>    <span class="comment"># header.html, footer.html, ...</span>
-├── <span class="attr">pages/</span>          <span class="comment"># index.html, about.html, blog/index.html</span>
-├── <span class="attr">assets/</span>         <span class="comment"># css/, js/, imágenes</span>
-├── <span class="attr">public/</span>         <span class="comment"># salida generada (no versionar)</span>
-└── <span class="attr">staticflow.js</span>   <span class="comment"># el motor</span></code></pre>
-      </section>
+        <h2 id="structure-title">Todo en su lugar</h2>
+        <p>Una carpeta por responsabilidad. Sin archivos de configuración de terceros, sin <code>node_modules</code> con 200 MB de dependencias.</p>
 
-      <!-- CTA -->
-      <div class="cta">
-        <h2>Empezá tu sitio hoy</h2>
-        <p>Cloná el repo como plantilla y tenés todo listo en segundos.</p>
+        <div class="two-col">
+          <div>
+<pre><code>mi-sitio/
+├── <span class="attr">_components/</span>
+│   ├── header.html
+│   └── footer.html
+├── <span class="attr">pages/</span>
+│   ├── index.html
+│   ├── about.html
+│   └── blog/
+│       └── index.html
+├── <span class="attr">assets/</span>
+│   ├── css/styles.css
+│   └── js/main.js
+├── <span class="attr">public/</span>          <span class="comment"># generado, no versionar</span>
+├── <span class="attr">lib/</span>             <span class="comment"># módulos del motor</span>
+├── staticflow.js
+└── staticflow.config.js</code></pre>
+          </div>
+          <div class="structure-desc">
+            <dl>
+              <dt><code>_components/</code></dt>
+              <dd>Fragmentos HTML reutilizables. Cualquier archivo <code>.html</code> aquí se puede importar con <code>&lt;!-- @import nombre --&gt;</code>.</dd>
+              <dt><code>pages/</code></dt>
+              <dd>Cada archivo se compila en una página del sitio. Las subcarpetas se preservan en <code>public/</code>.</dd>
+              <dt><code>assets/</code></dt>
+              <dd>CSS, JS, imágenes. Se copian tal cual a <code>public/assets/</code>.</dd>
+              <dt><code>public/</code></dt>
+              <dd>Salida del build. No versionar — se regenera en cada build.</dd>
+              <dt><code>staticflow.config.js</code></dt>
+              <dd>Configuración opcional del motor (puerto, minificación, etc.).</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Config file -->
+    <section class="config-section" aria-labelledby="config-title">
+      <div class="container">
+        <p class="section-label">Configuración</p>
+        <h2 id="config-title">staticflow.config.js</h2>
+        <p>Configurá el motor con un archivo de configuración en la raíz. Los valores del archivo sobreescriben los defaults, y los argumentos de CLI tienen la prioridad más alta.</p>
+
+<pre><code><span class="comment">// staticflow.config.js</span>
+module.exports = {
+  port:    <span class="val">3000</span>,      <span class="comment">// puerto del servidor de desarrollo</span>
+  verbose: <span class="val">true</span>,      <span class="comment">// mostrar mensajes en consola</span>
+  minify:  <span class="val">false</span>,     <span class="comment">// minificar HTML, CSS y JS en el build</span>
+
+  <span class="comment">// avanzado (raramente necesario cambiar)</span>
+  components: <span class="val">'_components'</span>,
+  pages:      <span class="val">'pages'</span>,
+  output:     <span class="val">'public'</span>,
+  assets:     <span class="val">'assets'</span>,
+};</code></pre>
+
+        <p>La precedencia es: <strong>defaults</strong> ← <strong>staticflow.config.js</strong> ← <strong>args de CLI</strong>.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <h2 id="cta-title">Empezá tu sitio hoy</h2>
+        <p>Cloná el repo como plantilla y tenés todo configurado en segundos. Sin instalar nada más que Node.js.</p>
         <div class="btn-group">
-          <a href="https://github.com/ylnaud/staticflow/generate" class="btn btn-primary">Usar como plantilla</a>
+          <a href="https://github.com/ylnaud/staticflow/generate" class="btn btn-primary" target="_blank" rel="noopener">Usar como plantilla →</a>
           <a href="/about.html" class="btn btn-outline">Leer documentación</a>
         </div>
       </div>
+    </section>
 
-    </div>
   </main>
 
   <!-- @import footer -->

@@ -3,71 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cómo funciona — StaticFlow</title>
+  <title>Documentación — StaticFlow</title>
+  <meta name="description" content="Documentación completa de StaticFlow: instalación, componentes, configuración, despliegue en Vercel y más.">
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <!-- @import header -->
 
   <main>
-    <div class="container" style="padding-top:48px;padding-bottom:64px;">
-      <div class="prose">
+    <div class="container">
+      <article class="prose">
 
-        <h1>Cómo funciona StaticFlow</h1>
-        <p class="lead">Un generador de sitios estáticos mínimo: tomás páginas HTML, usás componentes reutilizables, y obtenés un sitio listo para subir.</p>
+        <header class="prose-header">
+          <p class="section-label">Documentación</p>
+          <h1>StaticFlow</h1>
+          <p class="lead">Generador de sitios estáticos sin dependencias externas. Tomás páginas HTML, usás componentes reutilizables, y obtenés un sitio listo para subir a cualquier hosting.</p>
+        </header>
 
-        <h2>El flujo completo</h2>
-        <p>Cuando ejecutás <code>npm run build</code>, StaticFlow hace tres cosas:</p>
-        <ul>
-          <li>Lee los archivos en <code>_components/</code> y los resuelve (incluyendo imports anidados)</li>
-          <li>Compila cada página en <code>pages/</code>, reemplazando los <code>&lt;!-- @import nombre --&gt;</code> con el contenido del componente</li>
-          <li>Copia los assets de <code>assets/</code> y genera todo en <code>public/</code></li>
-        </ul>
+        <!-- Instalación -->
+        <section aria-labelledby="instalacion">
+          <h2 id="instalacion">Instalación</h2>
+          <p>Necesitás Node.js ≥ 22.15.0. No hay <code>npm install</code> — el motor no tiene dependencias externas.</p>
 
-        <h2>Componentes</h2>
-        <p>Creá cualquier archivo <code>.html</code> en <code>_components/</code> e importalo desde tus páginas:</p>
+          <ol class="steps">
+            <li>
+              <strong>Cloná el repo como plantilla</strong>
+              <p>Hacé clic en "Use this template" en GitHub o usá el link directo:</p>
+<pre><code><span class="comment"># Clonar directamente</span>
+<span class="cmd">git clone https://github.com/ylnaud/staticflow mi-sitio</span>
+<span class="cmd">cd mi-sitio</span></code></pre>
+            </li>
+            <li>
+              <strong>Iniciá el servidor de desarrollo</strong>
+<pre><code><span class="cmd">npm start</span>
+<span class="comment"># → servidor en http://localhost:3000 con live reload</span></code></pre>
+            </li>
+            <li>
+              <strong>Editá las páginas</strong>
+              <p>Modificá los archivos en <code>pages/</code> y <code>_components/</code>. El servidor reconstruye automáticamente ante cada cambio.</p>
+            </li>
+            <li>
+              <strong>Build de producción</strong>
+<pre><code><span class="cmd">npm run build</span>
+<span class="comment"># → genera public/ con HTML, CSS y JS minificados</span></code></pre>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Componentes -->
+        <section aria-labelledby="componentes">
+          <h2 id="componentes">Componentes</h2>
+          <p>Cualquier archivo <code>.html</code> en <code>_components/</code> se puede importar con:</p>
+
+<pre><code><span class="comment">&lt;!-- @import nombreDelComponente --&gt;</span></code></pre>
+
+          <p>StaticFlow reemplaza ese comentario con el contenido del archivo <code>_components/nombreDelComponente.html</code> antes de generar la página.</p>
+
+          <h3>Imports anidados</h3>
+          <p>Los componentes pueden importar otros componentes. Por ejemplo, <code>header.html</code> puede importar un componente <code>logo.html</code>:</p>
+
 <pre><code><span class="comment">&lt;!-- _components/header.html --&gt;</span>
 <span class="tag">&lt;header&gt;</span>
-  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"/"</span><span class="tag">&gt;</span>Mi Sitio<span class="tag">&lt;/a&gt;</span>
-<span class="tag">&lt;/header&gt;</span>
+  <span class="comment">&lt;!-- @import logo --&gt;</span>
+  <span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;/header&gt;</span></code></pre>
 
-<span class="comment">&lt;!-- pages/index.html --&gt;</span>
-<span class="comment">&lt;!-- @import header --&gt;</span></code></pre>
+          <h3>Detección de ciclos</h3>
+          <p>Si dos componentes se importan mutuamente (A → B → A), el build falla inmediatamente con un error claro:</p>
 
-        <p>Los componentes pueden importar otros componentes. Si hay un ciclo de imports (A → B → A), el build falla con un error claro.</p>
+<pre><code><span class="comment">❌ Error: Importación circular detectada: header -&gt; logo -&gt; header</span></code></pre>
 
-        <h2>Rutas</h2>
-        <p>Usá rutas absolutas en tu HTML (<code>href="/assets/css/styles.css"</code>) y StaticFlow las convierte automáticamente en rutas relativas según la profundidad de cada página.</p>
+          <h3>Componente inexistente</h3>
+          <p>Referenciar un componente que no existe rompe el build con exit code 1:</p>
 
-        <h2>Comandos disponibles</h2>
-        <table>
-          <thead>
-            <tr><th>Comando</th><th>Descripción</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>npm start</td><td>Modo desarrollo: build + servidor en localhost:3000 + watch</td></tr>
-            <tr><td>npm run build</td><td>Build de producción con minificación (HTML, CSS, JS)</td></tr>
-            <tr><td>node staticflow.js --port=8080</td><td>Cambiar el puerto del servidor de desarrollo</td></tr>
-            <tr><td>node staticflow.js --quiet</td><td>Modo silencioso (menos mensajes en consola)</td></tr>
-          </tbody>
-        </table>
+<pre><code><span class="comment">❌ Error: Componente "navbar" no encontrado</span></code></pre>
+        </section>
 
-        <h2>Despliegue en Vercel</h2>
-        <p>El repo ya incluye un <code>vercel.json</code> configurado. Para desplegarlo:</p>
-        <ul>
-          <li>Importá el repo desde <a href="https://vercel.com/new" style="color:var(--accent)">vercel.com/new</a></li>
-          <li>Vercel detecta el build command (<code>npm run build</code>) y la carpeta de salida (<code>public/</code>) automáticamente</li>
-          <li>Cada push a <code>main</code> dispara un redeploy</li>
-        </ul>
+        <!-- Rutas -->
+        <section aria-labelledby="rutas">
+          <h2 id="rutas">Rutas</h2>
+          <p>Usá rutas absolutas en tu HTML. StaticFlow las convierte automáticamente en rutas relativas según la profundidad de cada página:</p>
 
-        <h2>Limitaciones conocidas</h2>
-        <ul>
-          <li>Las rutas absolutas dentro de CSS (<code>url()</code>, <code>@import</code> de CSS) no se reescriben — usá rutas relativas en tus archivos CSS</li>
-          <li>El minificador de JS es básico (regex) — funciona para scripts simples pero puede tener problemas con template literals o sintaxis compleja</li>
-          <li>No hay soporte para variables de entorno ni preprocesadores (Sass, TypeScript, etc.)</li>
-        </ul>
+<pre><code><span class="comment">&lt;!-- En tu HTML usás rutas absolutas --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"/assets/css/styles.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"/"</span><span class="tag">&gt;</span>Inicio<span class="tag">&lt;/a&gt;</span>
 
-      </div>
+<span class="comment">&lt;!-- Para pages/blog/post.html StaticFlow las convierte a --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"../../assets/css/styles.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"../../"</span><span class="tag">&gt;</span>Inicio<span class="tag">&lt;/a&gt;</span></code></pre>
+        </section>
+
+        <!-- Minificación -->
+        <section aria-labelledby="minificacion">
+          <h2 id="minificacion">Minificación</h2>
+          <p><code>npm run build</code> activa <code>--minify</code> y procesa HTML, CSS y JS. El modo desarrollo (<code>npm start</code>) no minifica para facilitar el debugging.</p>
+
+          <p>El minificador es basado en regex — no es un parser completo. Funciona bien para la mayoría de los casos:</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Tipo</th><th>Qué hace</th><th>Limitación</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HTML</td>
+                  <td>Elimina comentarios, colapsa espacios entre tags</td>
+                  <td>No toca el contenido de <code>&lt;pre&gt;</code></td>
+                </tr>
+                <tr>
+                  <td>CSS</td>
+                  <td>Elimina comentarios y espacios innecesarios</td>
+                  <td>No soporta <code>@import</code> de CSS externo</td>
+                </tr>
+                <tr>
+                  <td>JS</td>
+                  <td>Elimina comentarios, colapsa espacios</td>
+                  <td>Puede fallar con template literals complejos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Config file -->
+        <section aria-labelledby="config">
+          <h2 id="config">Config file</h2>
+          <p>Creá un archivo <code>staticflow.config.js</code> en la raíz del proyecto para configurar el motor sin tocar argumentos de CLI:</p>
+
+<pre><code><span class="comment">// staticflow.config.js</span>
+module.exports = {
+  port:    <span class="val">3000</span>,
+  verbose: <span class="val">true</span>,
+  minify:  <span class="val">false</span>,
+};</code></pre>
+
+          <p>La precedencia es: <strong>defaults ← config file ← args de CLI</strong>. Un argumento de CLI siempre gana.</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Opción</th><th>Tipo</th><th>Default</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>port</code></td><td>number</td><td><code>3000</code></td><td>Puerto del servidor de desarrollo</td></tr>
+                <tr><td><code>verbose</code></td><td>boolean</td><td><code>true</code></td><td>Mostrar mensajes en consola</td></tr>
+                <tr><td><code>minify</code></td><td>boolean</td><td><code>false</code></td><td>Minificar HTML, CSS y JS</td></tr>
+                <tr><td><code>components</code></td><td>string</td><td><code>'_components'</code></td><td>Carpeta de componentes</td></tr>
+                <tr><td><code>pages</code></td><td>string</td><td><code>'pages'</code></td><td>Carpeta de páginas fuente</td></tr>
+                <tr><td><code>output</code></td><td>string</td><td><code>'public'</code></td><td>Carpeta de salida del build</td></tr>
+                <tr><td><code>assets</code></td><td>string</td><td><code>'assets'</code></td><td>Carpeta de assets estáticos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Comandos -->
+        <section aria-labelledby="comandos">
+          <h2 id="comandos">Comandos</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Comando</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>npm start</code></td><td>Build + servidor en <code>localhost:3000</code> + watch de cambios</td></tr>
+                <tr><td><code>npm run build</code></td><td>Build de producción con minificación, genera <code>public/</code></td></tr>
+                <tr><td><code>node staticflow.js --port=8080</code></td><td>Cambiar el puerto del servidor</td></tr>
+                <tr><td><code>node staticflow.js --quiet</code></td><td>Suprimir mensajes de consola</td></tr>
+                <tr><td><code>node staticflow.js --minify</code></td><td>Activar minificación explícitamente</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Despliegue -->
+        <section aria-labelledby="despliegue">
+          <h2 id="despliegue">Despliegue</h2>
+
+          <h3>Vercel</h3>
+          <p>El repo incluye <code>vercel.json</code> preconfigurado. Para desplegarlo:</p>
+          <ol class="steps">
+            <li>Importá el repo desde <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a></li>
+            <li>Vercel detecta el build command (<code>npm run build</code>) y la carpeta de salida (<code>public/</code>) automáticamente</li>
+            <li>Cada push a <code>main</code> dispara un redeploy automático</li>
+          </ol>
+
+          <h3>Netlify</h3>
+          <ol class="steps">
+            <li>Build command: <code>npm run build</code></li>
+            <li>Publish directory: <code>public</code></li>
+            <li>Node version: <code>22</code> (en Environment variables: <code>NODE_VERSION=22</code>)</li>
+          </ol>
+
+          <h3>Hosting estático genérico</h3>
+          <p>Ejecutá <code>npm run build</code> y subí el contenido de la carpeta <code>public/</code> a cualquier hosting que sirva archivos estáticos (GitHub Pages, Cloudflare Pages, S3, etc.).</p>
+        </section>
+
+        <!-- Limitaciones -->
+        <section aria-labelledby="limitaciones">
+          <h2 id="limitaciones">Limitaciones conocidas</h2>
+          <ul>
+            <li>Las rutas dentro de CSS (<code>url()</code>, <code>@import</code> de CSS) no se reescriben — usá rutas relativas en tus archivos CSS.</li>
+            <li>El minificador de JS es basado en regex, no en un parser AST real. Puede tener problemas con template literals o regex literales con <code>//</code>.</li>
+            <li>No hay soporte para preprocesadores (Sass, TypeScript, PostCSS, etc.).</li>
+            <li>No hay sistema de variables ni datos dinámicos — todo es HTML puro.</li>
+            <li>El watcher usa <code>fs.watch</code> nativo, que en Linux puede requerir ajustar <code>inotify</code> para proyectos con muchos archivos.</li>
+          </ul>
+        </section>
+
+      </article>
     </div>
   </main>
 

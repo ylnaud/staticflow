@@ -1,10 +1,15 @@
-<header>
-  <div class="container">
-    <a href="/" class="logo">Static<span>Flow</span></a>
-    <nav>
+<header role="banner">
+  <div class="container nav-container">
+    <a href="/" class="logo" aria-label="StaticFlow - Inicio">Static<span>Flow</span></a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" aria-label="Navegación principal">
       <a href="/">Inicio</a>
-      <a href="/about.html">Cómo funciona</a>
-      <a href="https://github.com/ylnaud/staticflow" class="btn-nav">GitHub →</a>
+      <a href="/about.html">Documentación</a>
+      <a href="/blog/index.html">Proyectos</a>
+      <a href="https://github.com/ylnaud/staticflow" class="btn-nav" target="_blank" rel="noopener">GitHub →</a>
     </nav>
   </div>
 </header>
+<script src="/assets/js/main.js" defer></script>
