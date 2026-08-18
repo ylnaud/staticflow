@@ -1,22 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Nosotros — Mi Sitio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cómo funciona — StaticFlow</title>
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <!-- @import header -->
+
   <main>
-    <h1>Sobre nosotros</h1>
-    <p>Este sitio fue creado con <strong>StaticFlow</strong>, un generador de sitios estáticos sin dependencias externas.</p>
-    <h2>¿Cómo funciona?</h2>
-    <p>StaticFlow toma tus páginas HTML, inyecta los componentes reutilizables (<em>header</em>, <em>footer</em>, etc.) y genera un sitio estático listo para subir a cualquier hosting.</p>
-    <ul>
-      <li>Sin frameworks pesados</li>
-      <li>Sin dependencias de npm</li>
-      <li>Compilación en milisegundos</li>
-    </ul>
+    <div class="container" style="padding-top:48px;padding-bottom:64px;">
+      <div class="prose">
+
+        <h1>Cómo funciona StaticFlow</h1>
+        <p class="lead">Un generador de sitios estáticos mínimo: tomás páginas HTML, usás componentes reutilizables, y obtenés un sitio listo para subir.</p>
+
+        <h2>El flujo completo</h2>
+        <p>Cuando ejecutás <code>npm run build</code>, StaticFlow hace tres cosas:</p>
+        <ul>
+          <li>Lee los archivos en <code>_components/</code> y los resuelve (incluyendo imports anidados)</li>
+          <li>Compila cada página en <code>pages/</code>, reemplazando los <code>&lt;!-- @import nombre --&gt;</code> con el contenido del componente</li>
+          <li>Copia los assets de <code>assets/</code> y genera todo en <code>public/</code></li>
+        </ul>
+
+        <h2>Componentes</h2>
+        <p>Creá cualquier archivo <code>.html</code> en <code>_components/</code> e importalo desde tus páginas:</p>
+<pre><code><span class="comment">&lt;!-- _components/header.html --&gt;</span>
+<span class="tag">&lt;header&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"/"</span><span class="tag">&gt;</span>Mi Sitio<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="comment">&lt;!-- pages/index.html --&gt;</span>
+<span class="comment">&lt;!-- @import header --&gt;</span></code></pre>
+
+        <p>Los componentes pueden importar otros componentes. Si hay un ciclo de imports (A → B → A), el build falla con un error claro.</p>
+
+        <h2>Rutas</h2>
+        <p>Usá rutas absolutas en tu HTML (<code>href="/assets/css/styles.css"</code>) y StaticFlow las convierte automáticamente en rutas relativas según la profundidad de cada página.</p>
+
+        <h2>Comandos disponibles</h2>
+        <table>
+          <thead>
+            <tr><th>Comando</th><th>Descripción</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>npm start</td><td>Modo desarrollo: build + servidor en localhost:3000 + watch</td></tr>
+            <tr><td>npm run build</td><td>Build de producción con minificación (HTML, CSS, JS)</td></tr>
+            <tr><td>node staticflow.js --port=8080</td><td>Cambiar el puerto del servidor de desarrollo</td></tr>
+            <tr><td>node staticflow.js --quiet</td><td>Modo silencioso (menos mensajes en consola)</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Despliegue en Vercel</h2>
+        <p>El repo ya incluye un <code>vercel.json</code> configurado. Para desplegarlo:</p>
+        <ul>
+          <li>Importá el repo desde <a href="https://vercel.com/new" style="color:var(--accent)">vercel.com/new</a></li>
+          <li>Vercel detecta el build command (<code>npm run build</code>) y la carpeta de salida (<code>public/</code>) automáticamente</li>
+          <li>Cada push a <code>main</code> dispara un redeploy</li>
+        </ul>
+
+        <h2>Limitaciones conocidas</h2>
+        <ul>
+          <li>Las rutas absolutas dentro de CSS (<code>url()</code>, <code>@import</code> de CSS) no se reescriben — usá rutas relativas en tus archivos CSS</li>
+          <li>El minificador de JS es básico (regex) — funciona para scripts simples pero puede tener problemas con template literals o sintaxis compleja</li>
+          <li>No hay soporte para variables de entorno ni preprocesadores (Sass, TypeScript, etc.)</li>
+        </ul>
+
+      </div>
+    </div>
   </main>
+
   <!-- @import footer -->
 </body>
 </html>

@@ -1,15 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Mi Sitio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StaticFlow — Generador de sitios estáticos sin dependencias</title>
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-      <!-- @import header -->
+  <!-- @import header -->
+
   <main>
-    <h1>Bienvenido a mi sitio</h1>
-    <p>Contenido principal...</p>
-  </main>  
- <!-- @import footer -->
+    <div class="container">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="badge">Sin dependencias · Node.js · Open Source</div>
+        <h1>Sitios estáticos,<br>sin complicaciones</h1>
+        <p>StaticFlow compila tus páginas HTML con componentes reutilizables y genera un sitio listo para subir a cualquier hosting.</p>
+        <div class="btn-group">
+          <a href="https://github.com/ylnaud/staticflow" class="btn btn-primary">Ver en GitHub</a>
+          <a href="/about.html" class="btn btn-outline">Cómo funciona →</a>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="features">
+        <div class="feature">
+          <div class="icon">⚡</div>
+          <h3>Ultra rápido</h3>
+          <p>Compilación completa en milisegundos, sin herramientas de compilación pesadas.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">♻️</div>
+          <h3>Componentes</h3>
+          <p>Reutilizá header, footer y cualquier fragmento HTML con una sola línea.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📦</div>
+          <h3>Cero dependencias</h3>
+          <p>Solo Node.js. Sin npm install, sin node_modules, sin sorpresas.</p>
+        </div>
+      </div>
+
+      <!-- Cómo funciona -->
+      <section>
+        <p class="section-label">Cómo funciona</p>
+        <h2>Un comando. Un sitio.</h2>
+        <p>Escribís tus páginas en HTML, referenciás los componentes con un comentario especial, y StaticFlow se encarga del resto.</p>
+
+        <div class="two-col">
+          <div>
+            <p style="font-size:0.8rem;font-weight:600;margin-bottom:8px;color:var(--text)">pages/index.html</p>
+<pre><code><span class="tag">&lt;body&gt;</span>
+  <span class="comment">&lt;!-- @import header --&gt;</span>
+
+  <span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Hola mundo<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+
+  <span class="comment">&lt;!-- @import footer --&gt;</span>
+<span class="tag">&lt;/body&gt;</span></code></pre>
+          </div>
+          <div>
+            <p style="font-size:0.8rem;font-weight:600;margin-bottom:8px;color:var(--text)">Terminal</p>
+<pre><code><span class="comment"># Modo desarrollo</span>
+<span class="cmd">npm start</span>
+
+<span class="comment"># Build para producción</span>
+<span class="cmd">npm run build</span>
+
+<span class="comment"># Resultado en public/</span>
+<span class="cmd">→ public/index.html ✅</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Estructura -->
+      <section>
+        <p class="section-label">Estructura</p>
+        <h2>Todo en su lugar</h2>
+        <p>Una estructura de carpetas simple y predecible. Nada mágico.</p>
+<pre><code>mi-sitio/
+├── <span class="attr">_components/</span>    <span class="comment"># header.html, footer.html, ...</span>
+├── <span class="attr">pages/</span>          <span class="comment"># index.html, about.html, blog/index.html</span>
+├── <span class="attr">assets/</span>         <span class="comment"># css/, js/, imágenes</span>
+├── <span class="attr">public/</span>         <span class="comment"># salida generada (no versionar)</span>
+└── <span class="attr">staticflow.js</span>   <span class="comment"># el motor</span></code></pre>
+      </section>
+
+      <!-- CTA -->
+      <div class="cta">
+        <h2>Empezá tu sitio hoy</h2>
+        <p>Cloná el repo como plantilla y tenés todo listo en segundos.</p>
+        <div class="btn-group">
+          <a href="https://github.com/ylnaud/staticflow/generate" class="btn btn-primary">Usar como plantilla</a>
+          <a href="/about.html" class="btn btn-outline">Leer documentación</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- @import footer -->
 </body>
 </html>
